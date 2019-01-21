@@ -1,0 +1,15 @@
+.cajat{
+    width:90%;
+    height: 100px;
+    background: green;
+}
+.cajap_mas{
+    width:0%;
+    height: 100px;
+    background:red;
+}
+.cajap_menos{
+    width:0%;
+    height: 100px;
+    background:blue;
+}

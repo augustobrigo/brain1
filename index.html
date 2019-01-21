@@ -1,0 +1,101 @@
+<html lang="es">
+	<head>
+		<title>Cronómetro</title>
+        <meta charset="utf-8" />
+        
+       <link rel="stylesheet" href="estilo.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	</head>
+    <body>
+        
+        
+        
+        <script>
+         $(inicializarEventos);
+        
+         function inicializarEventos(){
+             $("#btnComenzar").click(tiempoActivo);
+          //   $("#btnComprobar").click(comprobar);
+              $("#suma").keypress(function(evento){
+               if (evento.which==13){
+                   comprobar();
+               }
+             });
+             
+         }
+            
+        
+           var segundos=30;
+           var tiempojugada = null;  
+           var tiemposegundos=null
+          var numero1,numero2,puntos=0;
+         function tiempoActivo(){
+            $("#suma").focus();
+            $( "#suma" ).attr( "true", "true" );
+            $("#btnComenzar").attr("disabled","disabled");
+            tiempojugada=setInterval(function(){
+             
+                cargarNumeros();
+               
+         }, 3000);
+         tiemposegundos=setInterval(function(){
+         
+            $("#cajatiempo").animate({width:"-=3%"},"slow");
+            if (segundos==0) fin();
+            $("#spSegundos").text("segundos: "+segundos);
+            segundos--;
+         },1000);
+        }
+        function cargarNumeros(){
+            numero1=Math.round(Math.random()*10);
+            numero2=Math.round(Math.random()*10); 
+             $("#spNumero1").text("Num1: "+numero1);
+             $("#spNumero2").text("Num2: "+numero2);
+        }
+            function comprobar(){
+                resultado=numero1+numero2;
+                console.log(resultado);
+                propuesta=parseInt($("#suma").val());
+                console.log(propuesta);
+                if (resultado==propuesta){
+                                 puntos++  ;
+                                 $("#cajapuntosMas").animate({width:"+=5%"},"slow");
+                                   }
+                                   else{
+                                   puntos--;
+                                   $("#cajapuntosMenos").animate({width:"+=5%"},"slow");
+                                   }
+                $("#spPuntos").text("Puntos:  "+puntos);
+                $("#suma").focus();
+                $("#suma").val("");
+                
+            }
+            function fin(){
+                clearInterval(tiemposegundos);
+                clearInterval(tiempojugada);
+                
+            }
+      
+       
+      
+        </script>
+  
+	</body>
+    <button id="btnComenzar">Comenzar</button><br>
+   
+    <span id="spNumero1">0</span><br>
+    <span id="spNumero2">0</span><br>
+    <input type=text id=suma>
+  <!--  <button id="btnComprobar">Comprobar</button><br>-->
+     <span id="spPuntos">0</span><br>
+     <span id="spSegundos">0</span><br>
+     <div id="cajatiempo" class="cajat">
+
+     </div>
+     <div id="cajapuntosMas" class="cajap_mas"><br>
+
+    </div>
+    <div id="cajapuntosMenos" class="cajap_menos"><br>
+
+    </div>
+</html>
